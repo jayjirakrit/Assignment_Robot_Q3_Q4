@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.10.6 on win32)" generated="20220812 22:11:51.164" rpa="false" schemaversion="3">
+<suite id="s1" name="GetUserNotFound TestCase &amp; GetUserSuccess TestCase">
+<suite id="s1-s1" name="GetUserNotFound TestCase" source="C:\Users\ZZ01FV856\Desktop\Ascend\Robot_Python_Ascend\TestCases\GetUserNotFound_TestCase.robot">
+<kw name="Create Session" library="RequestsLibrary" type="SETUP">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220812 22:11:51.497" level="INFO">Creating Session using : alias=mysession, url=https://reqres.in/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220812 22:11:51.497" endtime="20220812 22:11:51.497"/>
+</kw>
+<test id="s1-s1-t1" name="Get User Profile Not Found Test" line="18">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/users/${user_id}</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220812 22:11:52.311" level="INFO">GET Request : url=https://reqres.in/api/users/1234 
+ path_url=/api/users/1234 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220812 22:11:52.311" level="INFO">GET Response : url=https://reqres.in/api/users/1234 
+ status=404, reason=Not Found 
+ headers={'Date': 'Fri, 12 Aug 2022 15:11:52 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '2', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8"', 'Via': '1.1 vegur', 'Cache-Control': 'max-age=14400', 'CF-Cache-Status': 'EXPIRED', 'Expect-CT': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=Tcg8l%2B%2B8HAwmbKU3Hikr799baTTMkC69Eg7DPIW4L1nTcwDzQfXsgRb0cd1OozZyiRN1RVCv7gluGEI5UIp3%2FPSGqJUtjjzBeXyb9TwrMWdc350kui2jPegj3A%3D%3D"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Vary': 'Accept-Encoding', 'Server': 'cloudflare', 'CF-RAY': '739a255dcd1d26fd-BKK'} 
+ body={} 
+ </msg>
+<msg timestamp="20220812 22:11:52.311" level="INFO">C:\Users\ZZ01FV856\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\connectionpool.py:1045: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20220812 22:11:52.313" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220812 22:11:51.499" endtime="20220812 22:11:52.313"/>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<var>${json_object}</var>
+<arg>${response.content}</arg>
+<doc>*DEPRECATED* Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</doc>
+<msg timestamp="20220812 22:11:52.314" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20220812 22:11:52.316" level="INFO">To JSON using : content={} </msg>
+<msg timestamp="20220812 22:11:52.316" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20220812 22:11:52.316" level="INFO">${json_object} = {}</msg>
+<status status="PASS" starttime="20220812 22:11:52.314" endtime="20220812 22:11:52.316"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220812 22:11:52.317" endtime="20220812 22:11:52.319"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>404</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220812 22:11:52.320" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220812 22:11:52.319" endtime="20220812 22:11:52.320"/>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<arg>${json_object}</arg>
+<doc>Verifies that the given item is empty.</doc>
+<msg timestamp="20220812 22:11:52.320" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20220812 22:11:52.320" endtime="20220812 22:11:52.320"/>
+</kw>
+<status status="PASS" starttime="20220812 22:11:51.498" endtime="20220812 22:11:52.321"/>
+</test>
+<kw name="Delete All Sessions" library="RequestsLibrary" type="TEARDOWN">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220812 22:11:52.322" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20220812 22:11:52.322" endtime="20220812 22:11:52.322"/>
+</kw>
+<doc>Test Demonstration</doc>
+<status status="PASS" starttime="20220812 22:11:51.188" endtime="20220812 22:11:52.322"/>
+</suite>
+<suite id="s1-s2" name="GetUserSuccess TestCase" source="C:\Users\ZZ01FV856\Desktop\Ascend\Robot_Python_Ascend\TestCases\GetUserSuccess_TestCase.robot">
+<kw name="Create Session" library="RequestsLibrary" type="SETUP">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220812 22:11:52.332" level="INFO">Creating Session using : alias=mysession, url=https://reqres.in/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220812 22:11:52.331" endtime="20220812 22:11:52.332"/>
+</kw>
+<test id="s1-s2-t1" name="Get User Profile Success Test" line="18">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/users/${user_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220812 22:11:52.925" level="INFO">GET Request : url=https://reqres.in/api/users/12 
+ path_url=/api/users/12 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220812 22:11:52.926" level="INFO">GET Response : url=https://reqres.in/api/users/12 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 12 Aug 2022 15:11:53 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"11c-Y8Nrcu5DO2DrJvfp3zc2PKGiar4"', 'Via': '1.1 vegur', 'Cache-Control': 'max-age=14400', 'CF-Cache-Status': 'REVALIDATED', 'Expect-CT': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=sCYTm5DPg6TbCfrVh8IKrESrTD5wVtGPrRST1Thn8n5evCW6BZaI75kkCItWfgmFQbzi6AFFUp89QeIK2UD6MdU3oz%2BX8qByNOS0cnwC7QTdnM%2ByCUGE8fakSw%3D%3D"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Vary': 'Accept-Encoding', 'Server': 'cloudflare', 'CF-RAY': '739a256259b15aca-BKK', 'Content-Encoding': 'gzip'} 
+ body={"data":{"id":12,"email":"rachel.howell@reqres.in","first_name":"Rachel","last_name":"Howell","avatar":"https://reqres.in/img/faces/12-image.jpg"},"support":{"url":"https://reqres.in/#support-heading","text":"To keep ReqRes free, contributions towards server costs are appreciated!"}} 
+ </msg>
+<msg timestamp="20220812 22:11:52.926" level="INFO">C:\Users\ZZ01FV856\AppData\Local\Programs\Python\Python310\lib\site-packages\urllib3\connectionpool.py:1045: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20220812 22:11:52.929" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220812 22:11:52.333" endtime="20220812 22:11:52.929"/>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<var>${json_object}</var>
+<arg>${response.content}</arg>
+<doc>*DEPRECATED* Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</doc>
+<msg timestamp="20220812 22:11:52.930" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20220812 22:11:52.934" level="INFO">To JSON using : content={"data":{"id":12,"email":"rachel.howell@reqres.in","first_name":"Rachel","last_name":"Howell","avatar":"https://reqres.in/img/faces/12-image.jpg"},"support":{"url":"https://reqres.in/#support-heading","text":"To keep ReqRes free, contributions towards server costs are appreciated!"}} </msg>
+<msg timestamp="20220812 22:11:52.934" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20220812 22:11:52.934" level="INFO">${json_object} = {'data': {'id': 12, 'email': 'rachel.howell@reqres.in', 'first_name': 'Rachel', 'last_name': 'Howell', 'avatar': 'https://reqres.in/img/faces/12-image.jpg'}, 'support': {'url': 'https://reqres.in/#sup...</msg>
+<status status="PASS" starttime="20220812 22:11:52.930" endtime="20220812 22:11:52.934"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220812 22:11:52.935" endtime="20220812 22:11:52.936"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20220812 22:11:52.938" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220812 22:11:52.937" endtime="20220812 22:11:52.938"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${id}</var>
+<arg>${json_object}</arg>
+<arg>$.data.id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220812 22:11:52.979" level="INFO">${id} = [12]</msg>
+<status status="PASS" starttime="20220812 22:11:52.938" endtime="20220812 22:11:52.979"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${email}</var>
+<arg>${json_object}</arg>
+<arg>$.data.email</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220812 22:11:52.997" level="INFO">${email} = ['rachel.howell@reqres.in']</msg>
+<status status="PASS" starttime="20220812 22:11:52.980" endtime="20220812 22:11:52.997"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${first_name}</var>
+<arg>${json_object}</arg>
+<arg>$.data.first_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220812 22:11:53.012" level="INFO">${first_name} = ['Rachel']</msg>
+<status status="PASS" starttime="20220812 22:11:52.998" endtime="20220812 22:11:53.012"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${last_name}</var>
+<arg>${json_object}</arg>
+<arg>$.data.last_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220812 22:11:53.029" level="INFO">${last_name} = ['Howell']</msg>
+<status status="PASS" starttime="20220812 22:11:53.013" endtime="20220812 22:11:53.029"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${avatar}</var>
+<arg>${json_object}</arg>
+<arg>$.data.avatar</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220812 22:11:53.049" level="INFO">${avatar} = ['https://reqres.in/img/faces/12-image.jpg']</msg>
+<status status="PASS" starttime="20220812 22:11:53.031" endtime="20220812 22:11:53.049"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${id[0]}</arg>
+<arg>12</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220812 22:11:53.050" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220812 22:11:53.049" endtime="20220812 22:11:53.050"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${email[0]}</arg>
+<arg>rachel.howell@reqres.in</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220812 22:11:53.051" endtime="20220812 22:11:53.053"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${first_name[0]}</arg>
+<arg>Rachel</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220812 22:11:53.054" endtime="20220812 22:11:53.055"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${last_name[0]}</arg>
+<arg>Howell</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220812 22:11:53.055" endtime="20220812 22:11:53.056"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${avatar[0]}</arg>
+<arg>https://reqres.in/img/faces/12-image.jpg</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220812 22:11:53.056" endtime="20220812 22:11:53.057"/>
+</kw>
+<status status="PASS" starttime="20220812 22:11:52.332" endtime="20220812 22:11:53.057"/>
+</test>
+<kw name="Delete All Sessions" library="RequestsLibrary" type="TEARDOWN">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220812 22:11:53.059" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20220812 22:11:53.059" endtime="20220812 22:11:53.059"/>
+</kw>
+<doc>Test Demonstration</doc>
+<status status="PASS" starttime="20220812 22:11:52.324" endtime="20220812 22:11:53.059"/>
+</suite>
+<status status="PASS" starttime="20220812 22:11:51.166" endtime="20220812 22:11:53.062"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="GetUserNotFound TestCase &amp; GetUserSuccess TestCase">GetUserNotFound TestCase &amp; GetUserSuccess TestCase</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="GetUserNotFound TestCase">GetUserNotFound TestCase &amp; GetUserSuccess TestCase.GetUserNotFound TestCase</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s2" name="GetUserSuccess TestCase">GetUserNotFound TestCase &amp; GetUserSuccess TestCase.GetUserSuccess TestCase</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20220812 22:11:52.314" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20220812 22:11:52.930" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+</errors>
+</robot>
