@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Assignment_Robot_Q3_Q4
-=======
 # RobotTestAutomation
 
 
@@ -28,5 +25,3 @@ Run `PowerShell -File Install_Library.ps1`
 
 Run `robot {TestSuitePath}` to execute the Test Suites from commandline
 Example: `robot TestCases/LoginFailed_TestCase.robot TestCases/LoginSuccess_TestCase.robot`
-
->>>>>>> bac0faf (start Robot Framework Project)
